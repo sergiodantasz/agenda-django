@@ -19,8 +19,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
-
-
 urlpatterns = [
     path('', include('contact.urls')),
     path('admin/', admin.site.urls),
