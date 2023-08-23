@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
@@ -24,6 +25,12 @@ class Contact(models.Model):
     picture = models.ImageField(upload_to=r'pictures/%Y/%m/%d/', blank=True)
     category = models.ForeignKey(
         Category,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True
+    )
+    owner = models.ForeignKey(
+        User,
         on_delete=models.SET_NULL,
         blank=True,
         null=True
