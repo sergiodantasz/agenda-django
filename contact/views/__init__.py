@@ -1,1 +1,1 @@
-from .contact import *
+from contact.views.contact import *
