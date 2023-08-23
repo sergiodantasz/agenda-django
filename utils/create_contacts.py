@@ -5,6 +5,7 @@ from sys import path
 
 from django import setup
 from django.conf import settings
+
 from faker import Faker
 
 DJANGO_BASE_DIR = Path(__file__).parent.parent
