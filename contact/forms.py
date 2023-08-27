@@ -11,6 +11,9 @@ class ContactForm(forms.ModelForm):
             'first_name', 'last_name', 'phone', 'email', 'description', 'category'
         )
     
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+    
     def clean(self):
         cleaned_data = self.cleaned_data
         first_name = cleaned_data.get('first_name')
