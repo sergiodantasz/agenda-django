@@ -1,0 +1,50 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+  <article class="profile-card">
+    <div class="profile-cover"></div>
+    <div class="profile-head">
+      <div class="profile-avatar">
+        {% if contact.picture %}
+          <img src="{{ contact.picture.url }}" alt="{{ contact.get_full_name }}">
+        {% else %}
+          <span>{{ contact.first_name|first|upper }}</span>
+        {% endif %}
+      </div>
+      <div class="profile-info">
+        <h1 class="profile-name">{{ contact.get_full_name }}</h1>
+        {% if contact.category %}
+          <span class="badge">{{ contact.category.name }}</span>
+        {% endif %}
+      </div>
+    </div>
+    <dl class="profile-details">
+      <div class="profile-row">
+        <dt>Telefone</dt>
+        <dd>{{ contact.phone }}</dd>
+      </div>
+      {% if contact.email %}
+        <div class="profile-row">
+          <dt>E-mail</dt>
+          <dd>{{ contact.email }}</dd>
+        </div>
+      {% endif %}
+      <div class="profile-row">
+        <dt>Criado em</dt>
+        <dd>{{ contact.created_date|date:'d/m/Y H:i' }}</dd>
+      </div>
+      {% if contact.description %}
+        <div class="profile-row">
+          <dt>Descrição</dt>
+          <dd>{{ contact.description }}</dd>
+        </div>
+      {% endif %}
+    </dl>
+    {% if user == contact.owner %}
+      <div class="profile-actions">
+        <a class="btn" href="{% url 'contact:update' contact.pk %}">Editar</a>
+        <a class="btn btn-danger" href="{% url 'contact:delete' contact.pk %}">Excluir</a>
+      </div>
+    {% endif %}
+  </article>
+{% endblock content %}

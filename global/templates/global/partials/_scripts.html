@@ -1,0 +1,29 @@
+<script>
+  document.addEventListener('click', function (event) {
+    var toggle = event.target.closest('[data-password-toggle]');
+    if (!toggle) return;
+    var field = toggle.closest('.password-field');
+    if (!field) return;
+    var input = field.querySelector('input[type="password"], input[type="text"]');
+    if (!input) return;
+    var isHidden = input.type === 'password';
+    input.type = isHidden ? 'text' : 'password';
+    toggle.setAttribute('aria-label', isHidden ? 'Ocultar senha' : 'Mostrar senha');
+  });
+
+  document.addEventListener('change', function (event) {
+    var input = event.target.closest('[data-file-input]');
+    if (!input) return;
+    var field = input.closest('.file-field');
+    if (!field) return;
+    var text = field.querySelector('[data-file-text]');
+    var dropzone = field.querySelector('[data-file-dropzone]');
+    if (input.files && input.files.length > 0) {
+      if (text) text.textContent = input.files[0].name;
+      if (dropzone) dropzone.classList.add('is-selected');
+    } else {
+      if (text) text.textContent = 'Escolha uma foto';
+      if (dropzone) dropzone.classList.remove('is-selected');
+    }
+  });
+</script>

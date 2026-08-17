@@ -1,0 +1,43 @@
+{% load i18n %}
+
+<div class="file-field">
+  <input
+    type="{{ widget.type }}"
+    name="{{ widget.name }}"
+    class="file-field-input"
+    data-file-input
+    {% include 'django/forms/widgets/attrs.html' %}
+  >
+  <label class="file-dropzone" for="{{ widget.attrs.id }}" data-file-dropzone>
+    <svg
+      class="file-dropzone-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="17 8 12 3 7 8" />
+      <line x1="12" y1="3" x2="12" y2="15" />
+    </svg>
+    <span class="file-dropzone-text" data-file-text>Escolha uma foto</span>
+    <span class="file-dropzone-hint">Formato de imagem (JPG, PNG, WebP)</span>
+  </label>
+  {% if widget.is_initial and widget.value %}
+    <div class="file-preview">
+      <img src="{{ widget.value.url }}" alt="Foto atual">
+      <label class="file-preview-clear" for="{{ widget.checkbox_id }}">
+        <input
+          type="checkbox"
+          name="{{ widget.checkbox_name }}"
+          id="{{ widget.checkbox_id }}"
+          {% if widget.attrs.checked %}checked{% endif %}
+        >
+        Remover foto
+      </label>
+    </div>
+  {% endif %}
+</div>

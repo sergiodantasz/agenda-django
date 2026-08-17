@@ -1,0 +1,21 @@
+<header class="form-head">
+  <span class="form-head-icon" aria-hidden="true">
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M12 20h9" />
+      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+    </svg>
+  </span>
+  <div class="form-head-text">
+    <h1 class="form-head-title">{{ form_title }}</h1>
+    {% if form_subtitle %}
+      <p class="form-head-subtitle">{{ form_subtitle }}</p>
+    {% endif %}
+  </div>
+</header>

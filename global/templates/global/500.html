@@ -1,0 +1,9 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+  <div class="empty-state">
+    <h1 class="empty-state-title">500</h1>
+    <p class="empty-state-text">Algo deu errado. Tente novamente mais tarde.</p>
+    <a class="btn" href="{% url 'contact:index' %}">Voltar para a agenda</a>
+  </div>
+{% endblock content %}

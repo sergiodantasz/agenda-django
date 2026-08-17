@@ -1,0 +1,13 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+  <section class="section section--narrow">
+    <div class="form-wrapper">
+      {% include 'contact/partials/_form_head.html' %}
+      <form action="{{ form_action }}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'contact/partials/_form_field.html' %}
+      </form>
+    </div>
+  </section>
+{% endblock content %}

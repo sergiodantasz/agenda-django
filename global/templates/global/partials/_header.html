@@ -1,0 +1,53 @@
+<header class="navbar">
+  <div class="navbar-inner container">
+    <a href="{% url 'contact:index' %}" class="brand">Agenda</a>
+    <nav class="nav" aria-label="Navegação principal">
+      <ul class="nav-list">
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a
+              class="nav-link nav-user-link"
+              href="{% url 'contact:profile_update' %}"
+              title="Meu perfil"
+            >
+              <span class="nav-avatar">
+                {% if user.profile.picture %}
+                  <img src="{{ user.profile.picture.url }}" alt="" aria-hidden="true">
+                {% else %}
+                  {{ user.first_name|default:user.username|first|upper }}
+                {% endif %}
+              </span>
+              {{ user.first_name|default:user.username }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact:create' %}">Novo contato</a>
+          </li>
+          <li class="nav-item">
+            <form action="{% url 'contact:logout' %}" method="POST">
+              {% csrf_token %}
+              <button class="nav-link nav-link-btn" type="submit">Sair</button>
+            </form>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact:login' %}">Entrar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-cta" href="{% url 'contact:register' %}">Criar conta</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <form action="{% url 'contact:search' %}" method="GET" class="search" role="search">
+      <input
+        type="search"
+        class="search-input"
+        placeholder="Buscar contato..."
+        name="q"
+        value="{{ search_value }}"
+        aria-label="Buscar contato"
+      >
+    </form>
+  </div>
+</header>

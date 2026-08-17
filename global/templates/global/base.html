@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    {% include 'global/partials/_head.html' %}
+    {% block extra_head %}
+    {% endblock extra_head %}
+  </head>
+  <body>
+    {% include 'global/partials/_header.html' %}
+    {% include 'global/partials/_messages.html' %}
+    <main class="container">
+      {% block content %} {% endblock %}
+    </main>
+    <footer class="footer">
+      <p class="footer-text">
+        Desenvolvido por
+        <a
+          class="footer-link"
+          href="https://github.com/sergiodantasz"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Sérgio Dantas</a>
+        <span aria-hidden="true">&middot;</span>
+        Código-fonte disponível no
+        <a
+          class="footer-link"
+          href="https://github.com/sergiodantasz/agenda-django"
+          target="_blank"
+          rel="noopener noreferrer"
+        >GitHub</a>
+      </p>
+    </footer>
+    {% block scripts %}
+    {% endblock scripts %}
+    {% include 'global/partials/_scripts.html' %}
+  </body>
+</html>

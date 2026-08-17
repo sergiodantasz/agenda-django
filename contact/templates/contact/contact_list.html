@@ -1,0 +1,50 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+  {% if contacts %}
+    <section class="section">
+      <div class="section-head">
+        <h1 class="section-title">
+          {% if search_value %}Resultados para “{{ search_value }}”{% else %}Contatos{% endif %}
+        </h1>
+        {% if search_value %}
+          <a class="btn btn-ghost" href="{% url 'contact:index' %}">Limpar busca</a>
+        {% endif %}
+      </div>
+      <div class="card-grid">
+        {% for contact in contacts %}
+          <a class="card" href="{% url 'contact:contact' contact.pk %}">
+            <div class="card-avatar">
+              {% if contact.picture %}
+                <img src="{{ contact.picture.url }}" alt="{{ contact.get_full_name }}">
+              {% else %}
+                <span>{{ contact.first_name|first|upper }}</span>
+              {% endif %}
+            </div>
+            <div class="card-body">
+              <h2 class="card-title">{{ contact.get_full_name }}</h2>
+              <p class="card-meta">{{ contact.phone }}</p>
+              {% if contact.category %}
+                <span class="badge">{{ contact.category.name }}</span>
+              {% endif %}
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+    {% include 'global/partials/_pagination.html' %}
+  {% else %}
+    <div class="empty-state">
+      <h1 class="empty-state-title">Nenhum contato encontrado</h1>
+      {% if search_value %}
+        <p class="empty-state-text">Não encontramos resultados para “{{ search_value }}”.</p>
+        <a class="btn btn-ghost" href="{% url 'contact:index' %}">Limpar busca</a>
+      {% else %}
+        <p class="empty-state-text">Sua agenda está vazia.</p>
+        {% if user.is_authenticated %}
+          <a class="btn" href="{% url 'contact:create' %}">Criar primeiro contato</a>
+        {% endif %}
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% if form.non_field_errors %}
+  <div class="alert alert-error">{{ form.non_field_errors }}</div>
+{% endif %}
+<div class="form-grid">
+  {% for field in form %}
+    {% with widget_type=field.widget_type %}
+      <div
+        class="form-group{% if field.errors %} has-error{% endif %}{% if widget_type == 'textarea' or widget_type == 'select' or widget_type == 'file' or widget_type == 'picture' or field.name == 'picture' %} form-group--full{% endif %}"
+        {% if field.errors %}data-error{% endif %}
+      >
+        <label class="form-label" for="{{ field.id_for_label }}">
+          {{ field.label }}
+          {% if field.field.required %}<span class="required">*</span>{% endif %}
+        </label>
+        {% if widget_type == 'password' %}
+          <div class="password-field">
+            {{ field }}
+            <button type="button" class="password-toggle" data-password-toggle aria-label="Mostrar senha">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+        {% else %}
+          {{ field }}
+        {% endif %}
+        {% if field.help_text %}
+          <div class="form-help">{{ field.help_text }}</div>
+        {% endif %}
+        {% if field.errors %}
+          <ul class="form-errors" aria-live="polite">
+            {% for error in field.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endwith %}
+  {% endfor %}
+</div>
+<div class="form-actions">
+  <button class="btn" type="submit">{{ form_submit_label|default:'Salvar' }}</button>
+  {% if cancel_url %}
+    <a class="btn btn-ghost" href="{{ cancel_url }}">Cancelar</a>
+  {% endif %}
+</div>

@@ -1,0 +1,17 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+  <div class="empty-state">
+    <h1 class="empty-state-title">Excluir contato</h1>
+    <p class="empty-state-text">
+      Tem certeza que deseja excluir <strong>{{ contact.get_full_name }}</strong>? Esta ação não pode ser desfeita.
+    </p>
+    <div class="empty-state-actions">
+      <a class="btn btn-ghost" href="{% url 'contact:contact' contact.pk %}">Cancelar</a>
+      <form action="{% url 'contact:delete' contact.pk %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">Excluir</button>
+      </form>
+    </div>
+  </div>
+{% endblock content %}

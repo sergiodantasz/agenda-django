@@ -1,0 +1,29 @@
+{% if page_obj.has_other_pages %}
+  <nav class="pagination" aria-label="Paginação">
+    {% if page_obj.has_previous %}
+      <a
+        class="pagination-link"
+        href="{% querystring page=page_obj.previous_page_number %}"
+        aria-label="Página anterior"
+      >
+        &laquo;
+      </a>
+    {% endif %}
+    {% for page in page_obj.paginator.page_range %}
+      {% if page == page_obj.number %}
+        <span class="pagination-link is-active">{{ page }}</span>
+      {% elif page >= page_obj.number|add:'-2' and page <= page_obj.number|add:'2' %}
+        <a class="pagination-link" href="{% querystring page=page %}">{{ page }}</a>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <a
+        class="pagination-link"
+        href="{% querystring page=page_obj.next_page_number %}"
+        aria-label="Próxima página"
+      >
+        &raquo;
+      </a>
+    {% endif %}
+  </nav>
+{% endif %}
