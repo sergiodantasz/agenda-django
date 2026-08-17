@@ -1,0 +1,33 @@
+[project]
+name = "agenda-django"
+version = "0.1.0"
+description = "Aplicação web de agenda escrita em Django."
+readme = "README.md"
+authors = [{ name = "Sérgio Dantas", email = "sergiodnts828@gmail.com" }]
+requires-python = ">=3.14"
+dependencies = ["django>=6.1", "django-environ>=0.14.0", "pillow>=11.3.0"]
+
+[dependency-groups]
+dev = [
+    "djade>=1.9.0",
+    "djangofmt>=0.2.12",
+    "faker>=37.0.0",
+    "poethepoet>=0.48.0",
+    "ruff>=0.16.3",
+]
+
+[tool.ruff]
+target-version = "py314"
+exclude = [".venv", "**/migrations"]
+
+[tool.poe.tasks]
+runserver = "python manage.py runserver"
+shell = "python manage.py shell"
+makemigrations = "python manage.py makemigrations"
+migrate = "python manage.py migrate"
+collectstatic = "python manage.py collectstatic --no-input --clear"
+format = [
+    { cmd = "ruff format ." },
+    { shell = "find global/templates contact/templates -name '*.html' -exec djade --target-version 6.0 {} + || test $? -eq 1" },
+    { cmd = "djangofmt --indent-width 2 global/templates contact/templates" },
+]
