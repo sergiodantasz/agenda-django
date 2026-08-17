@@ -5,14 +5,14 @@ design system próprio e suporte a tema escuro.
 
 ## Funcionalidades
 
-- Cadastro, login e edição de perfil de usuários, com foto de perfil
-- CRUD completo de contatos privados (somente o dono visualiza, edita e exclui)
-- Busca por nome, sobrenome, telefone ou e-mail
-- Paginação (20 contatos por página)
-- Categorias e upload de foto para os contatos
-- Formulários com validação nativa do navegador e interface moderna
-- Admin do Django configurado em português
-- Páginas de erro 404 e 500 customizadas
+- Cadastro, login e edição de perfil de usuários, com foto de perfil;
+- CRUD completo de contatos privados (somente o dono visualiza, edita e exclui);
+- Busca por nome, sobrenome, telefone ou e-mail;
+- Paginação (20 contatos por página);
+- Categorias e upload de foto para os contatos;
+- Formulários com validação nativa do navegador e interface moderna;
+- Admin do Django configurado em português;
+- Páginas de erro 404 e 500 customizadas.
 
 ## Requisitos
 
